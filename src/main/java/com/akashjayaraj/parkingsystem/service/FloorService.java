@@ -49,4 +49,12 @@ public class FloorService {
         }
         return availableFloors;
     }
+
+    public List<Floor> getAllFloors() {
+        List<Floor> floorsList = new ArrayList<>();
+        for(Map.Entry<Integer, Floor> entry : floors.entrySet()) {
+                floorsList.add(entry.getValue());
+        }
+        return floorsList;
+    }
 }
