@@ -12,12 +12,12 @@ import java.util.Random;
 @Component
 public class ExitGate extends Gate {
 
-    private ParkingService parkingService;
+    private ParkingSystem parkingSystem;
     private IdentityService identityService;
     private InsuranceService insuranceService;
 
-    public ExitGate(ParkingService parkingService, IdentityService identityService, InsuranceService insuranceService) {
-        this.parkingService = parkingService;
+    public ExitGate(ParkingSystem parkingSystem, IdentityService identityService, InsuranceService insuranceService) {
+        this.parkingSystem = parkingSystem;
         this.identityService = identityService;
         this.insuranceService = insuranceService;
     }
@@ -31,7 +31,7 @@ public class ExitGate extends Gate {
         }
         user.setTicket(null);
         user.setInsurance(null);
-        parkingService.releaseSlot(ticket);
+        parkingSystem.releaseSlot(ticket);
 
         return "Released slot " + ticket.getSlotId();
     }
@@ -46,7 +46,7 @@ public class ExitGate extends Gate {
         theftReport.setLawRefId("refid_123");
         theftReport.setStatus("Active");
 
-        parkingService.addReport(theftReport);
+        parkingSystem.addReport(theftReport);
 
         return theftReport;
     }

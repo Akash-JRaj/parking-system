@@ -12,12 +12,12 @@ import java.util.List;
 @Component
 public class EntryGate extends Gate {
 
-    private ParkingService parkingService;
+    private ParkingSystem parkingSystem;
     private IdentityService identityService;
     private InsuranceService insuranceService;
 
-    public EntryGate(ParkingService parkingService, IdentityService identityService, InsuranceService insuranceService) {
-        this.parkingService = parkingService;
+    public EntryGate(ParkingSystem parkingSystem, IdentityService identityService, InsuranceService insuranceService) {
+        this.parkingSystem = parkingSystem;
         this.identityService = identityService;
         this.insuranceService = insuranceService;
     }
@@ -30,8 +30,8 @@ public class EntryGate extends Gate {
 
         ParkingTicket ticket = new ParkingTicket();
 
-        ticket.setId(parkingService.generateRandomId());
-        ticket.setSlotId(parkingService.assignSlot().getId());
+        ticket.setId(parkingSystem.generateRandomId());
+        ticket.setSlotId(parkingSystem.assignSlot().getId());
         ticket.setIssuedAt(new Date());
         ticket.setUserId(user.getId());
         ticket.setAadhaarId(user.getAadhaarId());
@@ -43,7 +43,7 @@ public class EntryGate extends Gate {
     }
 
     public List<ParkingSlot> getAvailableSlots() {
-        return parkingService.getAvailableSlots();
+        return parkingSystem.getAvailableSlots();
     }
 
 }
