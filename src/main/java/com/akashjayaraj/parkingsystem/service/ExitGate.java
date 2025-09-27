@@ -3,8 +3,11 @@ package com.akashjayaraj.parkingsystem.service;
 import com.akashjayaraj.parkingsystem.exception.InvalidAadhaarException;
 import com.akashjayaraj.parkingsystem.model.Gate;
 import com.akashjayaraj.parkingsystem.model.ParkingTicket;
+import com.akashjayaraj.parkingsystem.model.TheftReport;
 import com.akashjayaraj.parkingsystem.model.User;
 import org.springframework.stereotype.Component;
+
+import java.util.Random;
 
 @Component
 public class ExitGate extends Gate {
@@ -31,5 +34,20 @@ public class ExitGate extends Gate {
         parkingService.releaseSlot(ticket);
 
         return "Released slot " + ticket.getSlotId();
+    }
+
+    public TheftReport reportTheft(Long userId) {
+        User user = identityService.getUserByUserId(userId);
+
+        TheftReport theftReport = new TheftReport();
+        theftReport.setId(Math.abs(new Random().nextLong()));
+        theftReport.setUserId(userId);
+        theftReport.setDescription("abc");
+        theftReport.setLawRefId("refid_123");
+        theftReport.setStatus("Active");
+
+        parkingService.addReport(theftReport);
+
+        return theftReport;
     }
 }

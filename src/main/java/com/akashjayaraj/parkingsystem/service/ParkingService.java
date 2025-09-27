@@ -2,6 +2,7 @@ package com.akashjayaraj.parkingsystem.service;
 
 import com.akashjayaraj.parkingsystem.model.ParkingSlot;
 import com.akashjayaraj.parkingsystem.model.ParkingTicket;
+import com.akashjayaraj.parkingsystem.model.TheftReport;
 import com.akashjayaraj.parkingsystem.strategy.ParkingSlotNearExitStrategy;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class ParkingService {
 
     Set<ParkingSlot> slots = new HashSet<>();
     Map<Long, ParkingSlot> slotMap = new HashMap<>();
+    private List<TheftReport> reports = new ArrayList<>();
 
     public ParkingService(ParkingSlotNearExitStrategy parkingSlotNearExitStrategy) {
         this.parkingSlotNearExitStrategy = parkingSlotNearExitStrategy;
@@ -45,5 +47,13 @@ public class ParkingService {
 
     public List<ParkingSlot> getAvailableSlots() {
         return new ArrayList<>(slots);
+    }
+
+    public List<TheftReport> getReports() {
+        return reports;
+    }
+
+    public void addReport(TheftReport report) {
+        reports.add(report);
     }
 }
