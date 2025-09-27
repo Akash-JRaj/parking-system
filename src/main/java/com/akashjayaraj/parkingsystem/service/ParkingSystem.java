@@ -6,6 +6,7 @@ import com.akashjayaraj.parkingsystem.model.ParkingTicket;
 import com.akashjayaraj.parkingsystem.model.TheftReport;
 import com.akashjayaraj.parkingsystem.strategy.ParkingSlotFloorAndExitStrategy;
 import com.akashjayaraj.parkingsystem.strategy.ParkingSlotNearExitStrategy;
+import com.akashjayaraj.parkingsystem.strategy.SlotAssignmentStrategy;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,8 +14,7 @@ import java.util.*;
 @Service
 public abstract class ParkingSystem {
 
-    private ParkingSlotNearExitStrategy parkingSlotNearExitStrategy;
-    private ParkingSlotFloorAndExitStrategy parkingSlotFloorAndExitStrategy;
+    private SlotAssignmentStrategy strategy;
 
     private FloorService floorService;
 
@@ -22,10 +22,9 @@ public abstract class ParkingSystem {
     Map<Long, ParkingSlot> slotMap = new HashMap<>();
     private List<TheftReport> reports = new ArrayList<>();
 
-    public ParkingSystem(ParkingSlotNearExitStrategy parkingSlotNearExitStrategy, FloorService floorService, ParkingSlotFloorAndExitStrategy parkingSlotFloorAndExitStrategy) {
-        this.parkingSlotNearExitStrategy = parkingSlotNearExitStrategy;
+    public ParkingSystem(SlotAssignmentStrategy strategy, FloorService floorService) {
+        this.strategy = strategy;
         this.floorService = floorService;
-        this.parkingSlotFloorAndExitStrategy = parkingSlotFloorAndExitStrategy;
 
         for(int i = 1; i <= 10; i++) {
             ParkingSlot slot = new ParkingSlot(i, false, i * 10);
@@ -47,7 +46,7 @@ public abstract class ParkingSystem {
 
     public ParkingSlot assignSlot() {
 //        ParkingSlot assignedSlot = parkingSlotNearExitStrategy.getParkingSlot(slots);
-        ParkingSlot assignedSlot = parkingSlotFloorAndExitStrategy.getParkingSlot(floorService.getBestFloor().getAvailableSlots());
+        ParkingSlot assignedSlot = strategy.getParkingSlot(floorService.getBestFloor().getAvailableSlots());
         slots.remove(assignedSlot);
         return assignedSlot;
     }
