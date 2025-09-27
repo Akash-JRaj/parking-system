@@ -1,5 +1,6 @@
 package com.akashjayaraj.parkingsystem.controller;
 
+import com.akashjayaraj.parkingsystem.model.User;
 import com.akashjayaraj.parkingsystem.service.EntryGate;
 import com.akashjayaraj.parkingsystem.service.ExitGate;
 import com.akashjayaraj.parkingsystem.model.ParkingSlot;
@@ -25,15 +26,15 @@ public class ParkingSystemController {
     }
 
     @GetMapping("/enter")
-    public ResponseEntity<ParkingTicket> enter() {
-        ParkingTicket ticket = entryGate.getTicket();
+    public ResponseEntity<ParkingTicket> enter(@RequestBody User user) {
+        ParkingTicket ticket = entryGate.getTicket(user);
 
         return ResponseEntity.status(HttpStatus.OK).body(ticket);
     }
 
     @PostMapping("/exit")
-    public ResponseEntity<String> exit(@RequestBody ParkingTicket ticket) {
-        String response = exitGate.acceptTicket(ticket);
+    public ResponseEntity<String> exit(@RequestBody User user) {
+        String response = exitGate.acceptTicket(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
