@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CarParkingSystem extends ParkingSystem{
-    public CarParkingSystem(ParkingSlotNearExitStrategy parkingSlotNearExitStrategy, FloorService floorService, ParkingSlotFloorAndExitStrategy parkingSlotFloorAndExitStrategy) {
-        super(parkingSlotNearExitStrategy, floorService, parkingSlotFloorAndExitStrategy);
+    public CarParkingSystem(ParkingSlotFloorAndExitStrategy parkingSlotFloorAndExitStrategy, FloorService floorService) {
+        super(parkingSlotFloorAndExitStrategy, floorService);
     }
 
     //we can add our methods and override the methods we may need to change.

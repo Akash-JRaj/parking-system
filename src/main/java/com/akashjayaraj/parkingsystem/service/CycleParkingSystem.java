@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CycleParkingSystem extends ParkingSystem{
     //We can make use of these classes wherever we require in our design
-    public CycleParkingSystem(ParkingSlotNearExitStrategy parkingSlotNearExitStrategy, FloorService floorService, ParkingSlotFloorAndExitStrategy parkingSlotFloorAndExitStrategy) {
-        super(parkingSlotNearExitStrategy, floorService, parkingSlotFloorAndExitStrategy);
+    public CycleParkingSystem(ParkingSlotNearExitStrategy parkingSlotNearExitStrategy, FloorService floorService) {
+        super(parkingSlotNearExitStrategy, floorService);
     }
 }
