@@ -14,10 +14,12 @@ public class EntryGate extends Gate {
 
     private ParkingService parkingService;
     private IdentityService identityService;
+    private InsuranceService insuranceService;
 
-    public EntryGate(ParkingService parkingService, IdentityService identityService) {
+    public EntryGate(ParkingService parkingService, IdentityService identityService, InsuranceService insuranceService) {
         this.parkingService = parkingService;
         this.identityService = identityService;
+        this.insuranceService = insuranceService;
     }
 
     public ParkingTicket getTicket(User user) {
@@ -35,6 +37,7 @@ public class EntryGate extends Gate {
         ticket.setAadhaarId(user.getAadhaarId());
 
         user.setTicket(ticket);
+        user.setInsurance(insuranceService.getPremiumInsurance());
 
         return ticket;
     }

@@ -11,10 +11,12 @@ public class ExitGate extends Gate {
 
     private ParkingService parkingService;
     private IdentityService identityService;
+    private InsuranceService insuranceService;
 
-    public ExitGate(ParkingService parkingService, IdentityService identityService) {
+    public ExitGate(ParkingService parkingService, IdentityService identityService, InsuranceService insuranceService) {
         this.parkingService = parkingService;
         this.identityService = identityService;
+        this.insuranceService = insuranceService;
     }
 
 
@@ -25,6 +27,7 @@ public class ExitGate extends Gate {
             throw new InvalidAadhaarException("Aadhaar from ticket doesn't match the user!");
         }
         user.setTicket(null);
+        user.setInsurance(null);
         parkingService.releaseSlot(ticket);
 
         return "Released slot " + ticket.getSlotId();

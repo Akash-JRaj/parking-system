@@ -10,4 +10,5 @@ public class User {
     private String aadhaarId;
     private boolean isVerifiedUser;
     private ParkingTicket ticket;
+    private Insurance insurance;
 }
