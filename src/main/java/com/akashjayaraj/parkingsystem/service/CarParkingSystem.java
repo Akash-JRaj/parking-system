@@ -4,7 +4,6 @@ import com.akashjayaraj.parkingsystem.strategy.ParkingSlotFloorAndExitStrategy;
 import com.akashjayaraj.parkingsystem.strategy.ParkingSlotNearExitStrategy;
 import org.springframework.stereotype.Service;
 
-@Service
 public class CarParkingSystem extends ParkingSystem{
     public CarParkingSystem(ParkingSlotFloorAndExitStrategy parkingSlotFloorAndExitStrategy, FloorService floorService) {
         super(parkingSlotFloorAndExitStrategy, floorService);
