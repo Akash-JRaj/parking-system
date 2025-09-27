@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class ParkingService {
+public abstract class ParkingSystem {
 
     private ParkingSlotNearExitStrategy parkingSlotNearExitStrategy;
     private ParkingSlotFloorAndExitStrategy parkingSlotFloorAndExitStrategy;
@@ -22,7 +22,7 @@ public class ParkingService {
     Map<Long, ParkingSlot> slotMap = new HashMap<>();
     private List<TheftReport> reports = new ArrayList<>();
 
-    public ParkingService(ParkingSlotNearExitStrategy parkingSlotNearExitStrategy, FloorService floorService, ParkingSlotFloorAndExitStrategy parkingSlotFloorAndExitStrategy) {
+    public ParkingSystem(ParkingSlotNearExitStrategy parkingSlotNearExitStrategy, FloorService floorService, ParkingSlotFloorAndExitStrategy parkingSlotFloorAndExitStrategy) {
         this.parkingSlotNearExitStrategy = parkingSlotNearExitStrategy;
         this.floorService = floorService;
         this.parkingSlotFloorAndExitStrategy = parkingSlotFloorAndExitStrategy;
